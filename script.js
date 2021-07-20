@@ -7,6 +7,9 @@ snake[0] = {
     y: 8 * box
 }
 
+let direction = "right"
+
+
 /* criar o background */
 function criarBG(){
     contexto.fillStyle = "lightgreen" //cor do background do canvas - estilo do contexto
@@ -23,14 +26,38 @@ function criarBG(){
 function criarCobrinha(){
     for(let i = 0; i < snake.length; i++){
         contexto.fillStyle = "green";
-        contexto.fillRect(snake[i].x, snake[i].y, box, box)
-        console.log(snake[i].x, snake[i].y, box, box)
+        contexto.fillRect(snake[i].x, snake[i].y, box, box);
     }
 }
 
-criarBG()
-criarCobrinha()
-console.log(snake[0].x, snake[0].y, box, box)
+
+function iniciarJogo(){
+    criarBG()
+    criarCobrinha()
+
+    let snakeX = snake[0].x 
+    let snakeY = snake[0].y
+
+    if(direction == "right") snakeX += box
+    if(direction == "left") snakeX -= box
+    if(direction == "up") snakeY -= box
+    if(direction == "down") snakeY += box
+    
+    snake.pop();
+
+    let newHead = {
+        x: snakeX,
+        y: snakeY
+    }
+
+    snake.unshift(newHead)
+
+}
+
+let jogo = setInterval(iniciarJogo, 100)
+
+
+
 
 
 
