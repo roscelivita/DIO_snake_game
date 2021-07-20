@@ -3,8 +3,8 @@ let contexto = canvas.getContext("2d") //bidimensional: eixo x e y
 let box = 32 //define o grid do canvas, cada quadrado com 32 pixels
 let snake = []
 snake[0] = {
-    x: 8 * box,
-    y: 8 * box
+    x: 7 * box,
+    y: 7 * box
 }
 
 let direction = "right"
@@ -55,10 +55,29 @@ function update(event){
 
 function iniciarJogo(){
     /* fazer com que a cobrinha ao 'sair' da tela apareça no lado oposto*/
-    if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0
+    /* if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0
     if(snake[0].x < 0 && direction == "left") snake[0].x = 16 * box
     if(snake[0].y > 15 * box && direction == "down") snake[0].y = 0
-    if(snake[0].y < 0 && direction == "up") snake[0].y = 16 * box
+    if(snake[0].y < 0 && direction == "up") snake[0].y = 16 * box */
+
+    /* fazer com que a cobrinha se choque com a borda do canvas - game over */
+    if(snake[0].x > 15 * box || snake[0].x < 0 || snake[0].y > 15 * box || snake[0].y < 0){
+        clearInterval(jogo)
+        alert("Game over =(")
+    } 
+ /*    if(snake[0].x < 0){
+        clearInterval(jogo)
+        alert("Game over =(")
+    }
+    if(snake[0].y > 15 * box){
+        clearInterval(jogo)
+        alert("Game over =(")
+    }
+    if(snake[0].y < 0) {
+        clearInterval(jogo)
+        alert("Game over =(")
+    }
+ */
 
     /* controlar o choque da cabeça da cobra com o seu próprio corpo */
     for(let i = 1; i < snake.length; i++){
@@ -71,6 +90,7 @@ function iniciarJogo(){
     criarBG()
     criarCobrinha()
     criarComida()
+    
 
     let snakeX = snake[0].x 
     let snakeY = snake[0].y

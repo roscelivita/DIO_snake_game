@@ -1,3 +1,6 @@
+*{
+    border: lightseagreen 1px solid;
+}
 body{
     display: flex;
     flex-direction: column;
